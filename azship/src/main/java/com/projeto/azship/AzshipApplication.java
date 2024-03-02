@@ -9,5 +9,5 @@ public class AzshipApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AzshipApplication.class, args);
 	}
-
+	
 }
