@@ -1,5 +1,6 @@
 package com.projeto.azship.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -32,11 +33,11 @@ public class Frete {
 
 	@Column(name = "peso_carga")
 	@JsonProperty("pesoCarga")
-	private Double pesoCarga;
+	private BigDecimal pesoCarga;
 
 	@Column(name = "cubagem_carga")
 	@JsonProperty("cubagemCarga")
-	private Double cubagemCarga;
+	private BigDecimal cubagemCarga;
 
 	@Column(name = "data_coleta")
 	@JsonProperty("dataColeta")
@@ -48,7 +49,7 @@ public class Frete {
 
 	@Column(name = "valor_frete")
 	@JsonProperty("valorFrete")
-	private Double valorFrete;
+	private BigDecimal valorFrete;
 
 	@Column(name = "status_frete")
 	@JsonProperty("statusFrete")
@@ -67,8 +68,8 @@ public class Frete {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Frete(Integer id, String localOrigem, String localDestino, String tipoCarga, Double pesoCarga,
-			Double cubagemCarga, LocalDate dataColeta, LocalDate dataEntrega, Double valorFrete, String statusFrete,
+	public Frete(Integer id, String localOrigem, String localDestino, String tipoCarga, BigDecimal pesoCarga,
+			BigDecimal cubagemCarga, LocalDate dataColeta, LocalDate dataEntrega, BigDecimal valorFrete, String statusFrete,
 			String meioTransporte, String condicoesEspeciais) {
 		super();
 		this.id = id;
@@ -85,8 +86,8 @@ public class Frete {
 		this.condicoesEspeciais = condicoesEspeciais;
 	}
 	
-	public Frete(String localOrigem, String localDestino, String tipoCarga, Double pesoCarga, Double cubagemCarga,
-			LocalDate dataColeta, LocalDate dataEntrega, Double valorFrete, String statusFrete, String meioTransporte,
+	public Frete(String localOrigem, String localDestino, String tipoCarga, BigDecimal pesoCarga, BigDecimal cubagemCarga,
+			LocalDate dataColeta, LocalDate dataEntrega, BigDecimal valorFrete, String statusFrete, String meioTransporte,
 			String condicoesEspeciais) {
 		super();
 		this.localOrigem = localOrigem;
@@ -134,19 +135,19 @@ public class Frete {
 		this.tipoCarga = tipoCarga;
 	}
 
-	public Double getPesoCarga() {
+	public BigDecimal getPesoCarga() {
 		return pesoCarga;
 	}
 
-	public void setPesoCarga(Double pesoCarga) {
+	public void setPesoCarga(BigDecimal pesoCarga) {
 		this.pesoCarga = pesoCarga;
 	}
 
-	public Double getCubagemCarga() {
+	public BigDecimal getCubagemCarga() {
 		return cubagemCarga;
 	}
 
-	public void setCubagemCarga(Double cubagemCarga) {
+	public void setCubagemCarga(BigDecimal cubagemCarga) {
 		this.cubagemCarga = cubagemCarga;
 	}
 
@@ -166,11 +167,11 @@ public class Frete {
 		this.dataEntrega = dataEntrega;
 	}
 
-	public Double getValorFrete() {
+	public BigDecimal getValorFrete() {
 		return valorFrete;
 	}
 
-	public void setValorFrete(Double valorFrete) {
+	public void setValorFrete(BigDecimal valorFrete) {
 		this.valorFrete = valorFrete;
 	}
 

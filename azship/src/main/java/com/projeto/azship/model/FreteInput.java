@@ -1,9 +1,15 @@
 package com.projeto.azship.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Positive;
 
 
 public class FreteInput {
@@ -17,20 +23,26 @@ public class FreteInput {
 	@JsonProperty("tipoCarga")
 	private String tipoCarga;
 
+	@Positive(message = "{peso_carga.positive}")
 	@JsonProperty("pesoCarga")
-	private Double pesoCarga;
+	private BigDecimal pesoCarga;
 
+	@Positive(message = "{cubagem_carga.positive}")
 	@JsonProperty("cubagemCarga")
-	private Double cubagemCarga;
+	private BigDecimal cubagemCarga;
 
+	@PastOrPresent(message = "{data_coleta.past.or.present}")
 	@JsonProperty("dataColeta")
 	private LocalDate dataColeta;
 
+	@PastOrPresent(message = "{data_entrega.past.or.present}")
 	@JsonProperty("dataEntrega")
 	private LocalDate dataEntrega;
 
+	@DecimalMin(value = "0.00", message = "{valor_frete.decimal.min}")
+	@Digits(fraction = 2, integer = 10, message = "{valor_frete.not.valid}")
 	@JsonProperty("valorFrete")
-	private Double valorFrete;
+	private BigDecimal valorFrete;
 
 	@JsonProperty("statusFrete")
 	private String statusFrete;
@@ -46,8 +58,8 @@ public class FreteInput {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FreteInput(String localOrigem, String localDestino, String tipoCarga, Double pesoCarga, Double cubagemCarga,
-			LocalDate dataColeta, LocalDate dataEntrega, Double valorFrete, String statusFrete, String meioTransporte,
+	public FreteInput(String localOrigem, String localDestino, String tipoCarga, BigDecimal pesoCarga, BigDecimal cubagemCarga,
+			LocalDate dataColeta, LocalDate dataEntrega, BigDecimal valorFrete, String statusFrete, String meioTransporte,
 			String condicoesEspeciais) {
 		super();
 		this.localOrigem = localOrigem;
@@ -87,19 +99,19 @@ public class FreteInput {
 		this.tipoCarga = tipoCarga;
 	}
 
-	public Double getPesoCarga() {
+	public BigDecimal getPesoCarga() {
 		return pesoCarga;
 	}
 
-	public void setPesoCarga(Double pesoCarga) {
+	public void setPesoCarga(BigDecimal pesoCarga) {
 		this.pesoCarga = pesoCarga;
 	}
 
-	public Double getCubagemCarga() {
+	public BigDecimal getCubagemCarga() {
 		return cubagemCarga;
 	}
 
-	public void setCubagemCarga(Double cubagemCarga) {
+	public void setCubagemCarga(BigDecimal cubagemCarga) {
 		this.cubagemCarga = cubagemCarga;
 	}
 
@@ -119,11 +131,11 @@ public class FreteInput {
 		this.dataEntrega = dataEntrega;
 	}
 
-	public Double getValorFrete() {
+	public BigDecimal getValorFrete() {
 		return valorFrete;
 	}
 
-	public void setValorFrete(Double valorFrete) {
+	public void setValorFrete(BigDecimal valorFrete) {
 		this.valorFrete = valorFrete;
 	}
 
