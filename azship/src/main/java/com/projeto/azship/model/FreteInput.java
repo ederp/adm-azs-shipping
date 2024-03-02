@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.projeto.azship.ports.ValorMonetario;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
@@ -40,7 +41,7 @@ public class FreteInput {
 	private LocalDate dataEntrega;
 
 	@DecimalMin(value = "0.00", message = "{valor_frete.decimal.min}")
-	@Digits(fraction = 2, integer = 10, message = "{valor_frete.not.valid}")
+	@ValorMonetario(message = "{valor_frete.not.valid}")
 	@JsonProperty("valorFrete")
 	private BigDecimal valorFrete;
 
