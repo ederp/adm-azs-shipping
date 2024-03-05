@@ -1,9 +1,10 @@
 package com.projeto.azship.ports;
 
-import java.util.List;
-
 import jakarta.validation.Valid;
 
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projeto.azship.model.Frete;
 import com.projeto.azship.model.FreteInput;
@@ -29,12 +29,14 @@ public interface FreteControllerPort {
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "Fretes encontrados", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Frete.class))),
         @ApiResponse(responseCode = "404", description = "Frete não encontrado") })
-    @GetMapping(value = "/fretes/busca",
+    @GetMapping(value = { "/fretes/busca", "/fretes/busca/{parametro}", "/fretes/busca/{parametro}/{pagina}", "/fretes/busca/{parametro}/{pagina}/{tamanho}" },
         produces = { "application/json" })
-    ResponseEntity<List<Frete>> fretesBuscaGet(@Parameter(in = ParameterIn.QUERY, description = "Parâmetro para busca em todas as propriedades do frete" ,schema=@Schema()) 
-    @Valid @RequestParam(value = "parametro", required = false) String parametro, 
+    ResponseEntity<Page<Frete>> fretesBuscaGet(@Parameter(in = ParameterIn.QUERY, description = "Parâmetro para busca em todas as propriedades do frete" ,schema=@Schema()) 
+    @PathVariable(value = "parametro", required = false) String parametro, 
     @Parameter(in = ParameterIn.QUERY, description = "Número da página para paginação" ,schema=@Schema( defaultValue="1")) 
-    @Valid @RequestParam(value = "pagina", required = false, defaultValue="1") Integer pagina);
+    @PathVariable(value = "pagina", required = false) Optional<Integer> pagina,
+    @Parameter(in = ParameterIn.QUERY, description = "Tamanho da página para paginação" ,schema=@Schema( defaultValue="10")) 
+    @PathVariable(value = "tamanho", required = false) Optional<Integer> tamanho);
 
 
     @Operation(summary = "Remover um frete por ID", description = "", tags={  })

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -21,46 +22,57 @@ public class Frete {
 
 	@Column(name = "local_origem")
 	@JsonProperty("localOrigem")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String localOrigem;
 
 	@Column(name = "local_destino")
 	@JsonProperty("localDestino")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String localDestino;
 
 	@Column(name = "tipo_carga")
 	@JsonProperty("tipoCarga")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String tipoCarga;
 
 	@Column(name = "peso_carga")
 	@JsonProperty("pesoCarga")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private BigDecimal pesoCarga;
 
 	@Column(name = "cubagem_carga")
 	@JsonProperty("cubagemCarga")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private BigDecimal cubagemCarga;
 
 	@Column(name = "data_coleta")
 	@JsonProperty("dataColeta")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private LocalDate dataColeta;
 
 	@Column(name = "data_entrega")
 	@JsonProperty("dataEntrega")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private LocalDate dataEntrega;
 
 	@Column(name = "valor_frete")
 	@JsonProperty("valorFrete")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private BigDecimal valorFrete;
 
 	@Column(name = "status_frete")
 	@JsonProperty("statusFrete")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String statusFrete;
 
 	@Column(name = "meio_transporte")
 	@JsonProperty("meioTransporte")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String meioTransporte;
 
 	@Column(name = "condicoes_especiais")
 	@JsonProperty("condicoesEspeciais")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String condicoesEspeciais;
 
 	public Frete() {

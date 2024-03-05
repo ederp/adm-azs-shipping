@@ -1,18 +1,18 @@
 package com.projeto.azship.adapters;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.projeto.azship.mapper.FreteMapper;
 import com.projeto.azship.model.Frete;
 import com.projeto.azship.model.FreteInput;
 import com.projeto.azship.ports.FreteRepository;
 import com.projeto.azship.ports.FreteServicePort;
-
-import jakarta.transaction.Transactional;
 
 @Service
 public class FreteServiceAdapter implements FreteServicePort {
@@ -33,17 +33,19 @@ public class FreteServiceAdapter implements FreteServicePort {
 		return this.freteRepository.save(frete);
 	}
 
-	private Optional<Frete> findById(Integer id) {
-		// TODO Auto-generated method stub
-		return this.freteRepository.findById(id);
-	}
-
 	@Override
-	public Frete findByParametro(String parametro) {
+	public Page<Frete> findByParametro(String parametro, Integer pagina, Integer tamanho) {
 		// TODO Auto-generated method stub
-		return null;
+		PageRequest pageRequest = PageRequest.of(
+                pagina,
+                tamanho,
+                Sort.Direction.ASC,
+                "id");
+		return new PageImpl<Frete>(freteRepository.findAll(FreteSpecification.buscarPorParametro(parametro)), 
+				pageRequest, tamanho); 
 	}
 
+	@Transactional
 	@Override
 	public Frete update(Integer id, FreteInput freteInput) {
 		// TODO Auto-generated method stub
@@ -89,6 +91,7 @@ public class FreteServiceAdapter implements FreteServicePort {
 		return null;
 	}
 
+	@Transactional
 	@Override
 	public boolean delete(Integer id) {
 		// TODO Auto-generated method stub

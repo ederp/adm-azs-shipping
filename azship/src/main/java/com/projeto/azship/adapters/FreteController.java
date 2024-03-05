@@ -1,10 +1,11 @@
 package com.projeto.azship.adapters;
 
-import java.util.List;
+import java.util.Optional;
 
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,9 +26,19 @@ public class FreteController implements FreteControllerPort {
 	}
 
 	@Override
-	public ResponseEntity<List<Frete>> fretesBuscaGet(@Valid String parametro, @Valid Integer pagina) {
+	public ResponseEntity<Page<Frete>> fretesBuscaGet(String parametro,
+			Optional<Integer> pagina,
+			Optional<Integer> tamanho) {
 		// TODO Auto-generated method stub
-		return null;
+		if(pagina.isEmpty()) {
+			pagina = Optional.of(1);
+		}
+		if(tamanho.isEmpty()) {
+			tamanho = Optional.of(10);
+		}
+		Page<Frete> listaFretes = this.freteService.findByParametro(parametro, pagina.get(), tamanho.get());
+		HttpStatus httpStatus = (listaFretes.get().toList().isEmpty()) ? HttpStatus.NOT_FOUND : HttpStatus.OK;
+		return ResponseEntity.status(httpStatus).body(listaFretes);
 	}
 
 	@Override
