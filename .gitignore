@@ -54,3 +54,7 @@ replay_pid*
 *.ipr
 *.iws
 /target/
+
+# Dependências Maven
+.m2/
+

@@ -1,5 +1,7 @@
 package com.projeto.azship.adapters;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -37,12 +39,17 @@ public class FreteServiceAdapter implements FreteServicePort {
 	public Page<Frete> findByParametro(String parametro, Integer pagina, Integer tamanho) {
 		// TODO Auto-generated method stub
 		PageRequest pageRequest = PageRequest.of(
-                pagina,
+                pagina - 1,
                 tamanho,
                 Sort.Direction.ASC,
                 "id");
-		return new PageImpl<Frete>(freteRepository.findAll(FreteSpecification.buscarPorParametro(parametro)), 
-				pageRequest, tamanho); 
+		List<Frete> result = freteRepository.findAll(FreteSpecification.buscarPorParametro(parametro));
+		int inicio = (int) pageRequest.getOffset();
+	    int fim = Math.min((inicio + pageRequest.getPageSize()), result.size());
+
+	    Page<Frete> page = new PageImpl<>(result.subList(inicio, fim), pageRequest, result.size());
+
+	    return page;
 	}
 
 	@Transactional
