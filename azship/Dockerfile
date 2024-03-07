@@ -13,9 +13,6 @@ RUN ./mvnw dependency:go-offline -B
 
 COPY src src
 
-# Adicione o script wait-for-mysql.sh ao diretório /app
-COPY wait-for-mysql.sh .
-
 RUN ./mvnw package -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
