@@ -14,3 +14,5 @@ Para rodar a aplicação em ambiente Docker, é necessário seguir estes passos:
 * `docker-compose up -d mysql-service` para subir o banco de dados;
 * Uma vez que o banco de dados esteja rodando na porta 3306 (isso pode ser conferido através do comando `docker-compose ps`), rodar o comando `docker-compose up -d web-service` para rodar a aplicação Spring Boot
 * Estando tudo ok e os conteiners rodando, ao acessar o link [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html), a documentação com os endpoints deve ser acessível e os endpoints poderão ser testados usando um software como o Postman ou o Insomnia.
+
+Obs.: Nesta [pasta](https://github.com/ederp/adm-azs-shipping/tree/main/azship/src/main/java/com/projeto/azship) estão os arquivos Java contendo os models, controllers e demais arquivos Java referentes a elaboração do projeto.
