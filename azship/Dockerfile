@@ -28,11 +28,5 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
-# Adicionar o script wait-for-mysql.sh ao diretório /app
-COPY wait-for-mysql.sh /app
-
-# Garantir que o script tenha permissões de execução
-RUN chmod +x /app/wait-for-mysql.sh
-
 # Rodar a aplicação Spring Boot
 ENTRYPOINT ["java", "-cp", "app:app/lib/*","com.projeto.azship.AzshipApplication"]
